@@ -1,0 +1,93 @@
+﻿@model DoAnQLFIGURE.FIGURE
+@{
+    ViewBag.Title = "Xoa";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2>Xóa sản phẩm</h2>
+
+<h3>Bạn có chắc chắn muốn xóa sản phẩm này không ?</h3>
+<div>
+    <h4>FIGURE</h4>
+    <hr />
+    @using (Html.BeginForm("DeleteSubmit", "SanPham", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.MaFigure)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaFigure)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TenFigure)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenFigure)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NamSX)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NamSX)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GiaBan)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AnhBia)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AnhBia)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Loai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Loai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NhaCungCap)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NhaCungCap)
+            </dd>
+
+        </dl>
+
+
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "DanhSachSP")
+        </div>
+    }
+</div>
+
+

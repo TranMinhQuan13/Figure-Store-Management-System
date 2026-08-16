@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DoAnQLFIGURE.HoaDon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<section class="products">
+    <table class="table">
+        <tr>
+            <th>
+                <p>Mã hóa đơn</p>
+            </th>
+            <th>
+                <p>Mã khách hàng</p>
+            </th>
+            <th>
+                <p>Mã nhân viên</p>
+            </th>
+            <th>
+                <p>Ngày lập<p>
+            </th>
+            <th>
+                <p>Tổng tiền</p>
+            </th>
+            <th>
+                <p>Tình trạng</p>
+            </th>
+            <th>
+                <p>Địa chỉ giao hàng</p>
+            </th>
+            <th>
+                <p>Đã thanh toán</p>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaHD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayLap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TINHTRANG1.TenTinhTrang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DaThanhToan)
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "ChinhSua", new { id = item.MaHD }) |
+                </td>
+            </tr>
+        }
+
+    </table>
+</section>

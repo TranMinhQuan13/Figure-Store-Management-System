@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewBag.Title = "EditInfo";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+}
+
+
+
+@model DoAnQLFIGURE.KHACHHANG
+
+
+<style>
+        .profile-container {
+            max-width: 960px;
+            margin: 60px auto;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #bb86fc, #ff7b72);
+            padding: 80px 40px 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .avatar-wrapper {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+            border: 8px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            position: relative;
+            background: #fff;
+        }
+        .avatar-wrapper img, .avatar-wrapper svg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .avatar-wrapper input[type="file"] {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .avatar-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-size: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        .avatar-wrapper:hover .avatar-overlay {
+            opacity: 1;
+        }
+        .profile-header h2 {
+            font-size: 36px;
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+        .profile-body {
+            padding: 60px 50px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .form-group {
+            margin-bottom: 0;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #bb86fc;
+            box-shadow: 0 0 0 3px rgba(187,134,252,0.2);
+        }
+        .btn-save {
+            background: #ff7b72;
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-right: 15px;
+        }
+        .btn-save:hover {
+            background: #ff5e52;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255,123,114,0.4);
+        }
+        .btn-cancel {
+            background: #f1f1f1;
+            color: #555;
+            padding: 15px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+        .text-danger {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        @*@media (max-width: 768px) {
+            .profile-container { margin: 30px auto; border-radius: 16px; }
+            .profile-header { padding: 60px 20px 40px; }
+            .avatar-wrapper { width: 140px; height: 140px; border-width: 6px; }
+            .profile-header h2 { font-size: 30px; }
+            .profile-body { padding: 40px 25px; }
+            .form-grid { grid-template-columns: 1fr; gap: 25px; }
+        }*@
+</style>
+
+
+<section class="products">
+    @if (TempData["WarningMessage"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
+            <strong>Thông báo: </strong> @TempData["WarningMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <div class="profile-container">
+
+        @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.MaKH) <!-- Giữ mã KH -->
+
+            <!-- Header với avatar có thể upload -->
+            <div class="profile-header">
+                <div class="avatar-wrapper">
+
+                    <!-- Icon mặc định nếu chưa có ảnh -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#ccc" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                    </svg>
+
+                </div>
+                <h2>@Model.TenKH</h2>
+            </div>
+
+            <!-- Form chỉnh sửa thông tin -->
+            <div class="profile-body">
+                <h4 class="mb-5 text-center" style="font-size:24px; color:#333;">Chỉnh sửa thông tin cá nhân</h4>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TenKH, "Họ và tên")
+                        @Html.EditorFor(m => m.TenKH, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ và tên" } })
+                        @Html.ValidationMessageFor(m => m.TenKH, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.GioiTinh, "Giới tính")
+                        @Html.DropDownListFor(m => m.GioiTinh, new SelectList(new[]
+                         {
+                             new { Value = "Nam", Text = "Nam" },
+                             new { Value = "Nữ", Text = "Nữ" },
+                             new { Value = "Khác", Text = "Khác" }
+                         }, "Value", "Text", Model.GioiTinh ?? "Khác"), new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NamSinh, "Năm sinh")
+                        @Html.TextBoxFor(m => m.NamSinh, new { @class = "form-control", type = "number", min = "1950", max = "2010" })
+                        @Html.ValidationMessageFor(m => m.NamSinh, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DienThoai, "Số điện thoại")
+                        @Html.EditorFor(m => m.DienThoai, new { htmlAttributes = new { @class = "form-control", placeholder = "090xxxxxxx" } })
+                        @Html.ValidationMessageFor(m => m.DienThoai, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, "Email")
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", type = "email" } })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DiaChi, "Địa chỉ giao hàng")
+                        @Html.TextAreaFor(m => m.DiaChi, new { @class = "form-control", rows = "3", placeholder = "Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành" })
+                        @Html.ValidationMessageFor(m => m.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn-save">Lưu thay đổi</button>
+                    <a href="@Url.Action("Info", "Account")" class="btn-cancel">Hủy bỏ</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+

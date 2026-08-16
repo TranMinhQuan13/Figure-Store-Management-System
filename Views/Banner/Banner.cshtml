@@ -1,0 +1,47 @@
+﻿@model List<Banner>
+@if (Model != null && Model.Any())
+{
+    <div id="mainBanner" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="6000">
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <img src="~/Content/Hinh/@Model[i].AnhBanner"
+                         class="d-block w-100 banner-img"
+                         alt="@Model[i].AnhBanner">
+                </div>
+            }
+        </div>
+
+        <!-- Chỉ hiển thị nút prev/next nếu có từ 2 slide trở lên -->
+        @if (Model.Count > 1)
+        {
+            <button class="carousel-control-prev" type="button" data-bs-target="#mainBanner" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#mainBanner" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        }
+    </div>
+}
+else
+{
+    <div class="text-center py-5 bg-secondary text-white mb-5">
+        <h3>FigureShop VN</h3>
+        <p>Đang cập nhật banner...</p>
+    </div>
+}
+
+<!-- CSS quan trọng để ảnh hiển thị đầy đủ -->
+<style>
+    .banner-img {
+        height: 600px !important; /* Đủ cao cho ảnh dọc kiểu Gundam */
+        object-fit: contain !important; /* Không bị cắt đầu/chân */
+        object-position: center top !important; /* Ưu tiên hiện phần đầu Gundam */
+        background-color: #00000000 !important; /* Nền đen đẹp */
+        width: 100%;
+    }
+</style>

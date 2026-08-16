@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "LienHe";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+}
+
+
+    <style>
+        :root {
+            --primary: #ff7b72;
+            --accent: #bb86fc;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #333;
+        }
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, #fff, var(--light));
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .contact-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        .contact-header p {
+            font-size: 20px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .contact-info h3 {
+            font-size: 28px;
+            color: var(--accent);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+        .info-item i {
+            font-size: 28px;
+            color: var(--primary);
+            width: 60px;
+            flex-shrink: 0;
+        }
+        .info-item div {
+            margin-left: 20px;
+        }
+        .info-item strong {
+            display: block;
+            color: var(--dark);
+            font-size: 19px;
+        }
+        .team-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .team-card h3 {
+            font-size: 28px;
+            color: var(--accent);
+            margin-bottom: 40px;
+        }
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .member {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 16px;
+            transition: transform 0.3s;
+        }
+        .member:hover {
+            transform: translateY(-10px);
+        }
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: #ddd;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 4px solid var(--primary);
+        }
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .member h4 {
+            font-size: 22px;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        .member p {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+            .contact-header h1 { font-size: 36px; }
+            .contact-header p { font-size: 18px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .team-members { grid-template-columns: 1fr; }
+        
+    </style>
+   
+
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-header">
+            <h1>Liên hệ với chúng tôi</h1>
+            <p>Nếu bạn có bất kỳ câu hỏi nào về sản phẩm, đơn hàng, hoặc cần hỗ trợ, hãy liên hệ với đội ngũ FigureShop. Chúng tôi luôn sẵn sàng hỗ trợ bạn!</p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Thông tin liên hệ chung -->
+            <div class="contact-info">
+                <h3>Thông tin liên hệ</h3>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Địa chỉ</strong>
+                        140 Lê Trọng Tấn, Quận Tân Phú, TP. Hồ Chí Minh
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Điện thoại</strong>
+                        0909 000 111
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        figureshop@gmail.com
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Giờ làm việc</strong>
+                        Thứ 2 - Thứ 7: 8:00 - 21:00<br>
+                        Chủ Nhật: 9:00 - 18:00
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thành viên nhóm (đồ án) -->
+            <div class="team-card">
+                <h3>Thành viên thực hiện đồ án</h3>
+                <div class="team-members">
+                    <div class="member">
+                        
+                        <h4>Vũ Minh Quân</h4>
+                        <p>MSSV: 2001230728</p>
+                    </div>
+                    <div class="member">
+                       
+                        <h4>Trần Minh Quân</h4>
+                        <p>MSSV: 2001230732</p>
+                    </div>
+                    <div class="member">
+                        
+                        <h4>Phan Thái Tuấn</h4>
+                        <p>MSSV: 2001230860</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

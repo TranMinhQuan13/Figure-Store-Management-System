@@ -1,0 +1,138 @@
+﻿@model List<FIGURE>
+@{
+    ViewBag.Title = "TrangChu";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+    var limited = (List<FIGURE>)ViewBag.Limited;
+    var deluxe = (List<FIGURE>)ViewBag.Deluxe;
+    var robot = (List<FIGURE>)ViewBag.Robot;
+    var anime = (List<FIGURE>)ViewBag.Anime;
+}
+
+<!-- Products grid -->
+<section class="products">
+    <div>
+        <h2>Sản phẩm nổi bật</h2>
+    </div>
+
+    <div class="product-grid">
+        <!--Card -->
+        @foreach (var item in Model)
+        {
+            <article class="product-card">
+
+                <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                    <div class="thumb">
+                        <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                    </div>
+                    <h4 class="title">@item.TenFigure</h4>
+                    <p class="price">
+                        @*<span class="old-price">750.000đ</span>*@
+                        <span class="new-price">@string.Format("{0:#,###0}", item.GiaBan)đ</span>
+                    </p>
+                </a>
+                <a href="@Url.Action("ThemGioHang","GioHang",new {mafigure=item.MaFigure,url=Request.Url.ToString()})" class="btn btn-primary">Thêm vào giỏ</a>
+            </article>
+        }
+
+    </div>
+    <div class="mt-2">
+        <h2>Sản phẩm cao cấp</h2>
+    </div>
+    <div class="product-grid">
+        <!--Card -->
+        @foreach (var item in deluxe)
+        {
+            <article class="product-card">
+
+                <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                    <div class="thumb">
+                        <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                    </div>
+                    <h4 class="title">@item.TenFigure</h4>
+                    <p class="price">
+                        @*<span class="old-price">750.000đ</span>*@
+                        <span class="new-price">@string.Format("{0:#,###0}", item.GiaBan)đ</span>
+                    </p>
+                </a>
+                <a href="@Url.Action("ThemGioHang","GioHang",new {mafigure=item.MaFigure,url=Request.Url.ToString()})" class="btn btn-primary">Thêm vào giỏ</a>
+            </article>
+        }
+
+    </div>
+    <div class="mt-2">
+        <h2>Sản phẩm Anime</h2>
+    </div>
+
+    <div class="product-grid">
+        <!--Card -->
+        @foreach (var item in anime)
+        {
+            <article class="product-card">
+
+                <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                    <div class="thumb">
+                        <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                    </div>
+                    <h4 class="title">@item.TenFigure</h4>
+                    <p class="price">
+                        @*<span class="old-price">750.000đ</span>*@
+                        <span class="new-price">@string.Format("{0:#,###0}", item.GiaBan)đ</span>
+                    </p>
+                </a>
+                <a href="@Url.Action("ThemGioHang","GioHang",new {mafigure=item.MaFigure,url=Request.Url.ToString()})" class="btn btn-primary">Thêm vào giỏ</a>
+            </article>
+        }
+
+    </div>
+    <div class="mt-2">
+        <h2>Sản phẩm giới hạn</h2>
+    </div>
+    <div class="product-grid">
+        <!--Card -->
+        @foreach (var item in limited)
+        {
+            <article class="product-card">
+
+                <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                    <div class="thumb">
+                        <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                    </div>
+                    <h4 class="title">@item.TenFigure</h4>
+                    <p class="price">
+                        @*<span class="old-price">750.000đ</span>*@
+                        <span class="new-price">@string.Format("{0:#,###0}", item.GiaBan)đ</span>
+                    </p>
+                </a>
+                <a href="@Url.Action("ThemGioHang","GioHang",new {mafigure=item.MaFigure,url=Request.Url.ToString()})" class="btn btn-primary">Thêm vào giỏ</a>
+            </article>
+        }
+
+    </div>
+    <div class="mt-2">
+        <h2>Sản phẩm Robot</h2>
+    </div>
+
+    <div class="product-grid">
+        <!--Card -->
+        @foreach (var item in robot)
+        {
+            <article class="product-card">
+
+                <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                    <div class="thumb">
+                        <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                    </div>
+                    <h4 class="title">@item.TenFigure</h4>
+                    <p class="price">
+                        @*<span class="old-price">750.000đ</span>*@
+                        <span class="new-price">@string.Format("{0:#,###0}", item.GiaBan)đ</span>
+                    </p>
+                </a>
+                <a href="@Url.Action("ThemGioHang","GioHang",new {mafigure=item.MaFigure,url=Request.Url.ToString()})" class="btn btn-primary">Thêm vào giỏ</a>
+            </article>
+        }
+
+    </div>
+</section>
+
+

@@ -1,0 +1,10 @@
+﻿@model List<NHACUNGCAP>
+<ul class="category-list">
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("LocSP", "BanHang", new {idloc=item.MaNCC,type =2})" class="text-decoration-none">@item.TenNCC</a></li>
+    }
+
+
+</ul>
+

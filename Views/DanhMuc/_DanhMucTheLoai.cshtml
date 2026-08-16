@@ -1,0 +1,11 @@
+﻿@model List<LOAIFIGURE>
+<ul class="category-list">
+    <li><a href="@Url.Action("TrangChu","BanHang")">Tất cả</a></li>
+    @foreach (var item in Model)
+    {
+        <li><a href="@Url.Action("LocSP", "BanHang", new {idloc=item.MaLoai, type =1})">@item.TenLoai</a></li>
+    }
+
+
+</ul>
+

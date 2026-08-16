@@ -1,0 +1,181 @@
+﻿@model FIGURE
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+    var ListBL = (IEnumerable<BINHLUAN>)ViewBag.lstbl;
+    var ListLQ = (IEnumerable<FIGURE>)ViewBag.lstloai;
+    var ListNCC = (IEnumerable<FIGURE>)ViewBag.lstncc;
+    string Drawstar(int n)
+    {
+        return new string('★', n) + new string('☆', 5 - n);
+    }
+}
+
+<style>
+    /* Ẩn radio button */
+    .star-rating input {
+        display: none;
+    }
+
+    /* Hiển thị các sao */
+    .star-rating label {
+        font-size: 2rem;
+        color: #ccc;
+        cursor: pointer;
+    }
+
+        /* Khi hover hoặc checked */
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: gold;
+            transition: color 0.2s;
+        }
+
+    /* Đảo ngược thứ tự để hover hoạt động từ trái sang phải */
+    .star-rating {
+        direction: rtl;
+        display: inline-flex;
+    }
+
+        .star-rating label {
+            margin: 0 2px;
+        }
+</style>
+<section class="products">
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Hình ảnh sản phẩm -->
+            <div class="col-md-5">
+                <div class="card shadow-sm border-0">
+                    <img src="~/Content/Hinh/@Model.AnhBia" alt="@Model.TenFigure">
+                </div>
+            </div>
+
+            <!-- Thông tin sản phẩm -->
+            <div class="col-md-7">
+                <h2 class="mb-3 text-primary">@Model.TenFigure</h2>
+                <h4 class="text-danger fw-bold">@string.Format("{0:#,##0}", Model.GiaBan)đ</h4>
+
+                <p class="mt-3" style="line-height: 1.8; font-size: 1.1rem; text-align: justify;">
+                    @Model.MoTa
+                </p>
+
+                <div class="mt-4">
+                    <a href="@Url.Action("ThemGioHang","GioHang",new {mafigure=Model.MaFigure,url=Request.Url.ToString()})" class="btn btn-primary">Thêm vào giỏ</a>
+                    <a href="@Url.Action("TrangChu","BanHang")" class="btn btn-outline-secondary btn-lg px-4 ms-2">
+                        <i class="bi bi-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h5>Đánh giá & Bình luận</h5>
+
+            @using (Html.BeginForm("ThemBL", "BanHang", new { masp = Model.MaFigure }, FormMethod.Post))
+            {<div class="mt-3">
+                    <textarea class="form-control" name="noiDung" rows="3" placeholder="Chia sẻ trải nghiệm..." required></textarea>
+                </div>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" title="5 sao">&#9733;</label>
+
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" title="4 sao">&#9733;</label>
+
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" title="3 sao">&#9733;</label>
+
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" title="2 sao">&#9733;</label>
+
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" title="1 sao">&#9733;</label>
+                </div>
+                <button class="btn btn-success mt-2">Gửi đánh giá</button>
+                <div class="mt-3">
+                    @foreach (var item in ListBL)
+                    {
+                        <div class="comment">
+
+                            <div class="comment__body">
+                                <div class="comment__header">
+                                    <span class="comment__name">@item.HoTen</span>
+                                    <span class="comment__meta ms-2 text-muted">@item.Ngay</span>
+                                </div>
+
+                                <div class="comment__rating">@Drawstar(item.SoSao)</div>
+
+
+                                <div class="comment__content">@item.NoiDung</div>
+
+                                <div class="comment__footer">
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+
+            }
+        </div>
+
+        <!-- Gợi ý sản phẩm liên quan -->
+
+        <div class="mt-5">
+            <h4 class="mb-3">Sản phẩm liên quan cùng loại</h4>
+            <div class="row">
+                <div class="product-grid">
+                    <!--Card 1-->
+                    @foreach (var item in ListLQ)
+                    {
+                        <article class="product-card">
+                            <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                                <div class="thumb">
+                                    <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                                </div>
+                                <h4 class="title">@item.TenFigure</h4>
+                                <p class="price">
+                                    <span class="old-price">750.000đ</span>
+                                    <span class="new-price">@string.Format("{0:#,##0}", item.GiaBan)đ</span>
+                                </p>
+                            </a>
+                            <button class="btn btn-primary">Thêm vào giỏ</button>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- Sản phẩm cùng nhà sản xuất -->
+
+        <div class="mt-5">
+            <h4 class="mb-3">Sản phẩm cùng nhà cung cấp</h4>
+            <div class="row">
+                <div class="product-grid">
+                    <!--Card 1-->
+                    @foreach (var item in ListNCC)
+                    {
+                        <article class="product-card">
+                            <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                                <div class="thumb">
+                                    <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                                </div>
+                                <h4 class="title">@item.TenFigure</h4>
+                                <p class="price">
+                                    <span class="old-price">750.000đ</span>
+                                    <span class="new-price">@string.Format("{0:#,##0}", item.GiaBan)đ</span>
+                                </p>
+                            </a>
+                            <button class="btn btn-primary">Thêm vào giỏ</button>
+                        </article>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+

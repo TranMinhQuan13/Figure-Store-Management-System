@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+    var sl = Session["SoLuong"] != null ? Session["SoLuong"] : 0;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Css/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/Css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(90deg, #1a1a2e, #252536);">
+        <div class="container">
+            <a class="navbar-brand text-white" href="@Url.Action("TrangChu","BanHang")">Figure<span style="color:#ff3d00">Shop</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link text-light" href="@Url.Action("TrangChu","BanHang")">Trang chủ</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">Sản phẩm</a>
+                        <div class="dropdown-menu bg-light ">
+
+
+                            @Html.Action("_DanhMucTheLoai", "DanhMuc")
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-light" href="@Url.Action("GioiThieu","BanHang")">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#">Liên hệ</a></li>
+                </ul>
+
+                <form class="d-flex me-2" action="/BanHang/TimKiem1" method="get">
+                    <input class="form-control me-2" type="search" name="keyword" placeholder="Tìm sản phẩm">
+                    <button class="btn btn-danger" type="submit">Tìm</button>
+                </form>
+
+                <a class="btn btn-warning me-2" href="@Url.Action("Index","GioHang")">
+                    <i class="fas fa-shopping-cart"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                    </svg>
+                    @sl
+                </a>
+
+
+                @if (Session["TenKH"] != null)
+                {
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="@Url.Action("Info", "Account")" class="nav-item nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                            </svg>
+                            @Session["TenKh"]
+                        </a>
+
+
+                    </div>
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="@Url.Action("LogOut","Account")" class="nav-item nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                            </svg>
+                            Đăng xuất
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="navbar-nav ml-auto py-0">
+
+                        <a href="@Url.Action("Index", "Account")" class="nav-item nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                            </svg>
+                            Đăng nhập
+
+
+                        </a>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <main class="container site-main">
+
+        @RenderBody()
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container d-flex justify-content-between flex-wrap">
+            <div>
+                <h5>FigureShop</h5>
+                <p>Địa chỉ: 140, Lê Trọng Tấn, TP.HCM</p>
+                <p>Điện thoại: 0909 000 111</p>
+                <p>Email: contact@figureshop.vn</p>
+            </div>
+            <div class="align-self-end copy">© 2025 FigureShop. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- FOOTER -->
+</body>
+</html>

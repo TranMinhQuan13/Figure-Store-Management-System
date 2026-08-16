@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DoAnQLFIGURE.FIGURE>
+
+@{
+    ViewBag.Title = "DanhSachSP";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<section class="products">
+    <h2>Danh sách các sản phẩm</h2>
+    <table class="table">
+        <tr>
+            <th>
+                <p>Mã figure</p>
+            </th>
+            <th>
+                <p>Tên figure</p>
+            </th>
+            <th>
+                <p>Năm sản xuất</p>
+            </th>
+            <th>
+                <p>Giá bán</p>
+            </th>
+            <th>
+                <p>Mô tả</p>
+            </th>
+            <th>
+                <p>Loại</p>
+            </th>
+            <th>
+                <p>Hình ảnh</p>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaFigure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenFigure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamSX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaBan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoTa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loai)
+                </td>
+                <td>
+                    <img src="~/Content/Hinh/@item.AnhBia" />
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa", "ChinhSua", new { id = item.MaFigure }) |
+                    @Html.ActionLink("Xóa", "Xoa", new { id = item.MaFigure })
+                </td>
+            </tr>
+        }
+
+    </table>
+</section>
+

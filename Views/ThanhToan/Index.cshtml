@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+}
+
+<style>
+    .success-card {
+        max-width: 700px;
+        margin: 60px auto;
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        text-align: center;
+        padding: 50px 30px;
+        color: #e0e0e0;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .success-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(138, 43, 226, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+    .success-icon {
+        font-size: 88px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 20px #bb86fc;
+    }
+
+    .success-title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #bb86fc;
+        margin-bottom: 16px;
+    }
+
+    .success-message {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #cfd8e3;
+    }
+
+    .btn-figure {
+        background: #ff7b72;
+        border: 0;
+        color: #fff;
+        font-weight: 600;
+        padding: 12px 30px;
+        border-radius: 10px;
+        transition: all 0.3s;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+        .btn-figure:hover {
+            background: #ff5e52;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 123, 114, 0.4);
+        }
+
+    .btn-outline-figure {
+        background: transparent;
+        border: 2px solid #bb86fc;
+        color: #bb86fc;
+    }
+
+        .btn-outline-figure:hover {
+            background: #bb86fc;
+            color: #1a1a2e;
+        }
+</style>
+
+<!-- Thông báo thanh toán thành công - Website bán Figure -->
+<div class="success-card">
+    <div class="success-icon">
+        🎉✨
+    </div>
+    <h3 class="success-title">Thanh toán thành công!</h3>
+    <p class="success-message">
+        Chúc mừng bạn đã sở hữu thêm những mô hình figure tuyệt vời!<br>
+        Đơn hàng của bạn đã được xác nhận. Chúng tôi sẽ đóng gói cẩn thận và giao đến tay collector sớm nhất có thể.
+    </p>
+
+    <!-- Gợi ý hình ảnh kệ trưng bày figure để tăng cảm xúc -->
+    <p style="font-size:14px; color:#8899a6; margin-bottom:20px;">
+        Hãy tưởng tượng các figure mới sẽ tỏa sáng trên kệ trưng bày của bạn như thế này:
+    </p>
+
+    <div class="mt-4">
+        <a href="@Url.Action("TrangChu", "BanHang")" class="btn-figure">Quay lại trang chủ</a>
+        <a href="@Url.Action("ChiTietDonHang", "ThanhToan")" class="btn-figure btn-outline-figure">Xem chi tiết đơn hàng</a>
+    </div>
+</div>
+<!-- Kết thúc thông báo -->

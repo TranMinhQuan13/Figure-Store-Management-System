@@ -1,0 +1,32 @@
+﻿@model List<FIGURE>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+}
+
+<!-- Products grid -->
+<section class="products">
+    <h2>Sản phẩm nổi bật</h2>
+
+    <div class="product-grid">
+        <!--Card -->
+        @foreach (var item in Model)
+        {
+            <article class="product-card">
+
+                <a href="@Url.Action("Detail","BanHang",new {masp=item.MaFigure})" style="text-decoration:none">
+                    <div class="thumb">
+                        <img src="~/Content/Hinh/@item.AnhBia" alt="@item.TenFigure" />
+                    </div>
+                    <h4 class="title">@item.TenFigure</h4>
+                    <p class="price">
+                        @*<span class="old-price">750.000đ</span>*@
+                        <span class="new-price">@string.Format("{0:#,###0}", item.GiaBan)đ</span>
+                    </p>
+                </a>
+                <a href="@Url.Action("ThemGioHang","GioHang",new {mafigure=item.MaFigure,url=Request.Url.ToString()})" class="btn btn-primary">Thêm vào giỏ</a>            </article>
+        }
+
+    </div>
+</section>
+

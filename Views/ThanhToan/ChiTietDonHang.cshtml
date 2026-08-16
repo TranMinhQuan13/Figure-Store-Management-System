@@ -1,0 +1,286 @@
+﻿@model  HoaDon
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+    KHACHHANG khachhang = ViewBag.KhachHang as KHACHHANG;
+    var dssanpham = (List<DoAnQLFIGURE.Models.GioHang>)ViewBag.GioHang;
+}
+
+
+<style>
+    :root {
+        --primary: #ff7b72; /* Cam neon chính */
+        --accent: #bb86fc; /* Tím neon phụ */
+        --success: #28a745;
+        --text: #333;
+        --bg-card: #fff;
+        --light-bg: #f8f9fa;
+    }
+
+    .order-detail-container {
+        max-width: 1100px;
+        margin: 60px auto;
+        background: var(--bg-card);
+        border-radius: 20px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .order-header {
+        background: linear-gradient(135deg, var(--accent), var(--primary));
+        padding: 70px 40px;
+        text-align: center;
+        color: white;
+    }
+
+        .order-header h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .order-header p {
+            font-size: 20px;
+            opacity: 0.95;
+        }
+
+    .order-body {
+        padding: 60px 50px;
+    }
+
+    .order-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .info-card {
+        background: var(--light-bg);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+        .info-card h5 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .info-card p {
+            margin: 12px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .info-card strong {
+            color: var(--text);
+        }
+
+    .order-items-table {
+        background: var(--bg-card);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+        .order-items-table thead th {
+            background: #eef2ff;
+            padding: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .order-items-table img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .order-items-table td {
+            vertical-align: middle;
+            padding: 1.2rem;
+        }
+
+        .order-items-table tbody tr:hover {
+            background: #f9f9ff;
+        }
+
+    .total-summary {
+        background: var(--light-bg);
+        padding: 30px;
+        border-radius: 16px;
+        margin-top: 40px;
+        text-align: right;
+        font-size: 1.2rem;
+    }
+
+        .total-summary .d-flex {
+            margin-bottom: 15px;
+        }
+
+        .total-summary hr {
+            border-color: #ddd;
+            margin: 20px 0;
+        }
+
+        .total-summary .grand-total {
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+    .btn-home {
+        background: var(--primary);
+        color: white;
+        padding: 16px 45px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-top: 40px;
+        display: inline-block;
+        transition: all 0.3s;
+        text-decoration: none;
+    }
+
+        .btn-home:hover {
+            background: #ff5e52;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255,123,114,0.4);
+        }
+
+    .order-detail-container {
+        margin: 30px auto;
+        border-radius: 16px;
+    }
+
+    .order-header {
+        padding: 50px 20px;
+    }
+
+        .order-header h2 {
+            font-size: 30px;
+        }
+
+        .order-header p {
+            font-size: 18px;
+        }
+
+    .order-body {
+        padding: 40px 20px;
+    }
+
+    .order-info-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .order-items-table img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .total-summary {
+        text-align: left;
+    }
+
+        .total-summary .d-flex {
+            justify-content: space-between;
+        }
+</style>
+
+
+<div class="order-detail-container">
+    <!-- Header chúc mừng -->
+    <div class="order-header">
+        <h2>Đơn hàng #@Model.MaHD</h2>
+        <p>Đặt hàng thành công! Cảm ơn bạn đã ủng hộ FigureShop 🎉<br>Figure của bạn sẽ sớm tỏa sáng trên kệ trưng bày!</p>
+    </div>
+
+    <!-- Nội dung chi tiết đơn hàng -->
+    <div class="order-body">
+        <!-- Thông tin khách hàng & giao hàng -->
+        <div class="order-info-grid">
+
+            <div class="info-card">
+                <h5>Thông tin khách hàng</h5>
+                <p><strong>Họ tên:</strong> @khachhang.TenKH</p>
+                <p><strong>Email</strong> @khachhang.Email</p>
+                <p><strong>Số điện thoại:</strong> @khachhang.DienThoai</p>
+            </div>
+
+
+
+            <div class="info-card">
+                <h5>Địa chỉ giao hàng</h5>
+                <p>@Model.DiaChiGiaoHang</p>
+                <p><strong>Ngày đặt hàng:</strong> @Model.NgayLap.</p>
+                <p><strong>Trạng thái:</strong> <span style=" font-weight:bold;" class="text-warning">Chưa thanh toán</span></p>
+            </div>
+
+            <div class="info-card">
+                <h5>Phương thức thanh toán</h5>
+                <p>Thanh toán khi nhận hàng (COD)</p>
+            </div>
+        </div>
+
+        <!-- Danh sách figure đã mua -->
+        <h4 class="mb-4 fw-bold" style="color:var(--text);">Các figure trong đơn hàng</h4>
+        <div class="table-responsive">
+            <table class="table order-items-table align-middle text-center">
+                <thead>
+                    <tr>
+                        <th class="text-start ps-4">Sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in dssanpham) // Thay bằng tên property chứa chi tiết đơn hàng
+                    {
+                        <tr>
+                            <td class="text-start ps-4">
+                                <div class="d-flex align-items-center gap-4">
+                                    <img src="~/Content/Hinh/@item.Anh" alt="@item.TenFigure" />
+                                    <div class="fw-medium">@item.TenFigure</div>
+                                </div>
+                            </td>
+                            <td>@string.Format("{0:#,###}", item.GiaBan) VNĐ</td>
+                            <td>@item.SoLuong</td>
+                            <td class="fw-bold">@string.Format("{0:#,###}", item.ThanhTien) VNĐ</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tóm tắt tổng tiền -->
+        <div class="total-summary">
+            <div class="d-flex justify-content-between">
+                <span>Tạm tính: </span>
+                <strong>@string.Format("{0:#,###}", Model.TongTien) VNĐ</strong>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span>Phí vận chuyển:</span>
+                <strong>10.000 VNĐ</strong>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between align-items-end">
+                <span class="grand-total">Tổng thanh toán:</span>
+                <strong class="grand-total">@string.Format("{0:#,###}", Model.TongTien + 10000) VNĐ</strong>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="@Url.Action("TrangChu", "BanHang")" class="btn-home">Quay lại trang chủ mua thêm figure</a>
+        </div>
+    </div>
+</div>
+

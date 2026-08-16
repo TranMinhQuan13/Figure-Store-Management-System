@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+}
+
+<div class="container">
+    <div class="login-container mt-4" style="width: 400px; margin:auto">
+        <div class="card shadow-lg p-3">
+            <h3 class="card-title text-center fw-bold text-primary mb-4">Đăng ký</h3>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+
+            @using (Html.BeginForm("XuLyFormDK", "Account", new { returnUrl = ViewBag.Url }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="FullName" class="form-label">Họ Tên</label>
+                    <input type="text" name="fullname" class="form-control" id="FullName" value="@Request["fullname"]" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" id="loginEmail" value="@Request["email"]" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Mật khẩu</label>
+                    <input type="password" name="password" class="form-control" id="loginPassword" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Nhập lại mật khẩu</label>
+                    <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Giới tính</label>
+                    <div class="d-flex gap-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="Male" checked>
+                            <label class="form-check-label" for="male">Nam</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                            <label class="form-check-label" for="female">Nữ</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3">ĐĂNG KÝ</button>
+
+                <p class="text-center">
+                    Bạn đã có tài khoản?
+                    <a href="@Url.Action("Index","Account", new { returnUrl = ViewBag.Url })"
+                       class="text-decoration-none fw-bold">Đăng nhập ngay</a>
+                </p>
+            }
+        </div>
+    </div>
+</div>
+

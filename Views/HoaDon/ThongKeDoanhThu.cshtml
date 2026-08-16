@@ -1,0 +1,116 @@
+﻿@model List<DoAnQLFIGURE.Models.DoanhThuModel>
+@{
+    ViewBag.Title = "ThongKeDoanhThu";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<h2 class="text-center mb-4">Thống kê doanh thu năm @ViewBag.Nam</h2>
+
+<!-- Form chọn năm - SỬA ĐÚNG TÊN ACTION VÀ CONTROLLER -->
+@using (Html.BeginForm("ThongKeDoanhThu", "HoaDon", FormMethod.Get))
+{
+    <div class="form-group mb-4">
+        <label class="font-weight-bold">Chọn năm:</label>
+        <select name="nam" class="form-control d-inline-block" style="width:200px;" onchange="this.form.submit()">
+            @foreach (int n in ViewBag.DanhSachNam)
+            {
+                <option value="@n" @(n == ViewBag.Nam ? "selected" : "")>@n</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-primary ml-2">Xem</button>
+    </div>
+}
+
+<!-- Bảng thống kê -->
+<table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Tháng</th>
+            <th>Doanh thu (VNĐ)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ThangText</td>
+                <td class="text-right">@string.Format("{0:N0}", item.TongDoanhThu) đ</td>
+            </tr>
+        }
+        <tr class="table-success font-weight-bold">
+            <td>Tổng năm @ViewBag.Nam</td>
+            <td class="text-right">@string.Format("{0:N0}", ViewBag.TongNam) đ</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Biểu đồ -->
+<div class="mt-5">
+    <canvas id="chartDoanhThu" height="120"></canvas>
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById('chartDoanhThu').getContext('2d');
+
+            // Tạo labels: "Tháng 1", "Tháng 2", ..., "Tháng 12"
+            const labels = [
+                "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+                "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+            ];
+
+            // Tạo dataValues từ Model (12 tháng, nếu thiếu thì 0)
+            const dataValues = [@Html.Raw(string.Join(",", Model.Select(m => m.TongDoanhThu)))];
+            // Đảm bảo đủ 12 giá trị (nếu thiếu thì thêm 0)
+            while (dataValues.length < 12) {
+                dataValues.push(0);
+            }
+
+            // Nếu toàn bộ là 0 → hiện thông báo
+            if (dataValues.every(v => v === 0)) {
+                document.getElementById('chartDoanhThu').style.display = 'none';
+                document.getElementById('chartDoanhThu').insertAdjacentHTML('afterend', '<p class="text-center text-muted mt-3">Không có dữ liệu doanh thu cho năm này.</p>');
+                return;
+            }
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Doanh thu (VNĐ)',
+                        data: dataValues,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return value.toLocaleString('vi-VN') + ' đ';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return 'Doanh thu: ' + context.parsed.y.toLocaleString('vi-VN') + ' đ';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

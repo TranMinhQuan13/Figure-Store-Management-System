@@ -1,0 +1,191 @@
+﻿@model KHACHHANG
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_LayoutPageBH.cshtml";
+}
+
+<style>
+        .profile-container {
+            max-width: 960px;
+            margin: 60px auto;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #bb86fc, #ff7b72);
+            padding: 80px 40px 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .avatar-wrapper {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+            border: 8px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    .btn-save {
+        background: #ff7b72;
+        border: none;
+        color: white;
+        padding: 15px 40px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.3s;
+        margin-right: 15px;
+    }
+
+        .btn-save:hover {
+            background: #ff5e52;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255,123,114,0.4);
+        }
+        .profile-header h2 {
+            font-size: 36px;
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+        .profile-header p {
+            font-size: 20px;
+            opacity: 0.95;
+        }
+        .profile-body {
+            padding: 60px 50px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 700;
+            color: #666;
+            width: 220px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: #222;
+            font-weight: 500;
+            font-size: 17px;
+        }
+        .btn-edit-profile {
+            background: #ff7b72;
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-edit-profile:hover {
+            background: #ff5e52;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(255, 123, 114, 0.4);
+            color: white;
+        }
+        @*@media (max-width: 768px) {
+            .profile-container {
+                margin: 30px auto;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-label {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+            .profile-body {
+                padding: 40px 30px;
+            }
+            .profile-header {
+                padding: 60px 20px 40px;
+            }
+        }*@
+</style>
+
+<section class="products">
+    <div class="profile-container">
+        <!-- Header với avatar và tên -->
+        <div class="profile-header">
+            <div class="avatar-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                </svg>
+                @*@if (!string.IsNullOrEmpty(Model.Avarta))
+                {
+                    <img src="~/Content/Hinh/@Model.Avarta" alt="Avatar của @Model.TenKH" />
+                }
+                else
+                {
+                    <img src="https://via.placeholder.com/180x180/eeeeee/999999?text=Collector" alt="Avatar mặc định" />
+                }*@
+            </div>
+            <h2>@Model.TenKH</h2>
+            
+        </div>
+
+        <!-- Thông tin chi tiết -->
+        <div class="profile-body">
+            <h4 class="mb-5 text-center" style="font-size:24px; color:#333;">Thông tin cá nhân</h4>
+
+            <div class="info-grid">
+               
+
+                <div class="info-item">
+                    <span class="info-label">Giới tính:</span>
+                    <span class="info-value">@(string.IsNullOrEmpty(Model.GioiTinh) ? "Khác" : Model.GioiTinh)</span>
+
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Năm sinh:</span>
+                    <span class="info-value">@Model.NamSinh</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Số điện thoại:</span>
+                    <span class="info-value">@Model.DienThoai</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">@Model.Email</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Địa chỉ giao hàng:</span>
+                    <span class="info-value">@Model.DiaChi</span>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="@Url.Action("EditInfo", "Account")" class="btn-save text-decoration-none ">Chỉnh sửa thông tin</a>
+            </div>
+        </div>
+    </div>
+</section>
+

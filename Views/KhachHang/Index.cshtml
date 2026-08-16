@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DoAnQLFIGURE.KHACHHANG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<section class="products">
+    <table class="table">
+        <tr>
+            <th>
+                <p>Mã khách hàng</p>
+            </th>
+            <th>
+                <p>Họ Tên</p>
+            </th>
+            <th>
+                <p>Năm sinh</p>
+            </th>
+            <th>
+                <p>Mật khẩu<p>
+            </th>
+            <th>
+                <p>Giới tính</p>
+            </th>
+            <th>
+                <p>SĐT</p>
+            </th>
+            <th>
+                <p>Email</p>
+            </th>
+            <th>
+                <p>Địa chỉ</p>
+            </th>
+            <th>
+                <p>Avatar</p>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamSinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DienThoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    <img src="~/Content/HinhAnh/@Html.DisplayFor(modelItem => item.Avarta)" />
+                </td>
+               
+            </tr>
+        }
+
+    </table>
+</section>

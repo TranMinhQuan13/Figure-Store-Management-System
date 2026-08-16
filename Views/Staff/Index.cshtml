@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DoAnQLFIGURE.NHANVIEN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+<h2>Danh sách nhân viên</h2>
+<section class="products">
+    <table class="table">
+        <tr>
+            <th>
+                <p>Mã nhân viên</p>
+            </th>
+            <th>
+                <p>Họ Tên</p>
+            </th>
+            <th>
+                <p>Ngày sinh</p>
+            </th>
+            <th>
+                <p>Giới tính</p>
+            </th>
+            <th>
+                <p>Chức vụ</p>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNV)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNV)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamSinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VAITRO1.TenVaiTro)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+</section>
